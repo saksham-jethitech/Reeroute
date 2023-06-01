@@ -46,7 +46,7 @@ const TruckerForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg p-5 w-1/3 ">
+    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-1/3 ">
       {showSuccessMessage ? (
         <SuccessMessage setOpen={setShowSuccessMessage} />
       ) : showFailMessage ? (

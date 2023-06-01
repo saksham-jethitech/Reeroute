@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.css";
 import TruckerForm from "./Components/TruckerForm";
+import HomeAdditionalDetail from "./Components/HomeAdditionalDetail";
 
 const Home = () => {
   return (
@@ -10,8 +11,8 @@ const Home = () => {
           src="/Assets/Background.jpg"
           className="w-full h-full object-cover inset-0"
         />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex flex-col w-2/5 space-y-3">
+        <div className="absolute inset-0 flex flex-col justify-around lg:justify-center lg:flex-row items-center ">
+          <div className="flex flex-col w-full px-4 lg:px-0 lg:w-2/5 space-y-3">
             <div className="px-2 border-l-4 border-l-[#FFB629]">
               <p className="font-rubik font-normal text-sm text-white">
                 Streamline Your Logistics with Easy Truck Booking
@@ -37,6 +38,7 @@ const Home = () => {
           </div>
           <TruckerForm />
         </div>
+        <HomeAdditionalDetail />
       </div>
     </div>
   );
