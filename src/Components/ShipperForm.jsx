@@ -3,6 +3,8 @@ import SuccessMessage from "./FormMessage/SuccessMessage";
 import FailMessage from "./FormMessage/FailMessage";
 import FirstStep from "./ShipperFormPages/FirstStep";
 import SecondStep from "./ShipperFormPages/SecondStep";
+import axios from "axios";
+import { BASE_URL } from "../Constants";
 
 const ShipperForm = () => {
   const [fromCity, setFromCity] = useState("");
@@ -46,7 +48,7 @@ const ShipperForm = () => {
     // setShowFailMessage(true);
   };
 
-  const handleSecondStepSubmit = () => {
+  const handleSecondStepSubmit = async () => {
     setEmptyMaterialWeightField(false);
     setEmpltyVehicleTypeField(false);
     setEmptyTruckLengthField(false);
@@ -78,7 +80,30 @@ const ShipperForm = () => {
 
     // setShowSecondStep(true);
 
-    setShowSuccessMessage(true);
+    await axios
+      .post(`${BASE_URL}/email/shipper`, {
+        fromCity,
+        toCity,
+        materialWeight,
+        vehicleType,
+        truckLength,
+        truckHeight,
+      })
+      .then((res) => {
+        setShowSuccessMessage(true);
+        setShowSecondStep(false);
+        setFromCity("");
+        setToCity("");
+        setMaterialWeight("");
+        setVehicleType("");
+        setTruckLength("");
+        setTruckHeight("");
+      })
+      .catch((error) => {
+        setShowFailMessage(true);
+      });
+
+    // setShowSuccessMessage(true);
 
     // setFromCity("");
     // setToCity("");
@@ -90,12 +115,12 @@ const ShipperForm = () => {
   const handleSuccessClose = () => {
     setShowSuccessMessage(false);
     setShowSecondStep(false);
-    setFromCity("");
-    setToCity("");
-    setMaterialWeight("");
-    setVehicleType("");
-    setTruckLength("");
-    setTruckHeight("");
+    // setFromCity("");
+    // setToCity("");
+    // setMaterialWeight("");
+    // setVehicleType("");
+    // setTruckLength("");
+    // setTruckHeight("");
   };
 
   const handleFailClose = () => {
