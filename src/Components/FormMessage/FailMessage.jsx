@@ -11,7 +11,7 @@ const FailMessage = ({ setOpen }) => {
       <div className="w-full ">
         <button
           className="w-full  bg-[#f79633] py-4 font-krub text-sm font-semibold"
-          onClick={() => setOpen(false)}
+          onClick={setOpen}
         >
           Retry
         </button>

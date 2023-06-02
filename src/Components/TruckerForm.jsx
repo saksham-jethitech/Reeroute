@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import SuccessMessage from "./FormMessage/SuccessMessage";
 import FailMessage from "./FormMessage/FailMessage";
+import axios from "axios";
+import { BASE_URL } from "../Constants";
 
 const TruckerForm = () => {
   const [mobileNumber, setMobileNumber] = useState("");
@@ -13,7 +15,7 @@ const TruckerForm = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailMessage, setShowFailMessage] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setEmpltyCityField(false);
     setEmptyMobileNumberField(false);
     setEmptyNumberOfTrucksField(false);
@@ -37,20 +39,39 @@ const TruckerForm = () => {
     )
       return;
 
-    setMobileNumber("");
-    setNumberOfTrucks("");
-    setCity("");
     // setShowSuccessMessage(true);
 
-    setShowFailMessage(true);
+    await axios
+      .post(`${BASE_URL}/email/trucker`, {
+        mobileNumber,
+        numberOfTrucks,
+        city,
+      })
+      .then((res) => {
+        setShowSuccessMessage(true);
+        setMobileNumber("");
+        setNumberOfTrucks("");
+        setCity("");
+      })
+      .catch((error) => {
+        setShowFailMessage(true);
+      });
+  };
+
+  const handleSuccessSubmit = () => {
+    setShowSuccessMessage(false);
+  };
+
+  const handleFailSubmit = () => {
+    setShowFailMessage(false);
   };
 
   return (
-    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-1/3 ">
+    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-[30%] ">
       {showSuccessMessage ? (
-        <SuccessMessage setOpen={setShowSuccessMessage} />
+        <SuccessMessage setOpen={handleSuccessSubmit} />
       ) : showFailMessage ? (
-        <FailMessage setOpen={setShowFailMessage} />
+        <FailMessage setOpen={handleFailSubmit} />
       ) : (
         <div className="flex flex-col  items-center space-y-5">
           <h3 className="font-rubik font-medium text-2xl">Onboard Yourself!</h3>

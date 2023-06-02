@@ -1,13 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // return () => {
+    //   window.removeEventListener("scroll", handleScroll);
+    // };
+  }, []);
 
   const location = useLocation();
 
   return (
-    <nav className="w-full bg-transparent fixed shadow z-10">
+    <nav
+      className={`w-full ${scrolled ? "bg-black" : "bg-transparent "} ${
+        navbar ? "bg-black" : ""
+      } fixed shadow z-10`}
+    >
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -58,12 +76,12 @@ const Navbar = () => {
               navbar ? "block" : "hidden"
             }`}
           >
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-20 md:space-y-0">
+            <ul className="items-center justify-center space-y-8 md:flex md:space-x-20 md:space-y-0 ">
               <li>
                 <NavLink
-                  to="/shipper"
+                  to="/"
                   className={`${
-                    location.pathname == "/shipper"
+                    location.pathname == "/"
                       ? `border-b-4 border-white rounded`
                       : ``
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}
