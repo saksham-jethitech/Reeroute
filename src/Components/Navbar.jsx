@@ -22,9 +22,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`w-full ${scrolled ? "bg-black" : "bg-transparent "} ${
-        navbar ? "bg-black" : ""
-      } fixed shadow z-10`}
+      className={`w-full  ${
+        navbar ? "bg-black" : scrolled ? "bg-black" : "bg-transparent "
+      }   fixed  z-10`}
     >
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
@@ -128,9 +128,9 @@ const Navbar = () => {
               <li>
                 <NavLink
                   // onClick={handleGetApp}
-                  to="/contact"
+                  to="/contactUs"
                   className={`${
-                    location.pathname == "/contact"
+                    location.pathname == "/contactUs"
                       ? `border-b-4 border-white rounded`
                       : `text-white`
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}

@@ -7,6 +7,9 @@ module.exports = {
         krub: ["Krub", "sans-serif"],
         rubik: ["Rubik", "sans-serif"],
       },
+      height: {
+        "vh-80": "80vh",
+      },
     },
   },
   plugins: [],
