@@ -103,9 +103,9 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/about"
+                  to="/aboutUs"
                   className={`${
-                    location.pathname == "/about"
+                    location.pathname == "/aboutUs"
                       ? `border-b-4 border-white rounded`
                       : `text-white`
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}

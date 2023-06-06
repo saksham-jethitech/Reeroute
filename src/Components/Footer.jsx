@@ -5,6 +5,11 @@ import { BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 
 const Footer = () => {
+  const handleClick = () => {
+    // setAllLinksToInactive();
+    window.scroll(0, 0);
+  };
+
   return (
     <>
       <div className="h-auto lg:h-[40%] bg-[#2A4F6D] py-8 lg:py-0 px-10 w-full flex flex-wrap lg:flex-nowrap flex-row space-y-5 lg:space-x-7 lg:space-y-0 items-center justify-center p-2 pt-16">
@@ -47,15 +52,24 @@ const Footer = () => {
           <Link
             to="/carrers"
             className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleClick}
           >
             Careers
           </Link>
-          <span className="font-krub font-medium text-base text-white cursor-pointer">
+          <Link
+            to="/terms-and-conditions"
+            className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleClick}
+          >
             Terms &Conditions
-          </span>
-          <span className="font-krub font-medium text-base text-white cursor-pointer">
+          </Link>
+          <Link
+            to="/privacy-policy"
+            className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleClick}
+          >
             Privacy Policy
-          </span>
+          </Link>
         </div>
 
         <div className="pt-10 lg:mt-0 flex flex-col justify-start  w-full lg:w-[25%] h-1/2 space-y-10 lg:space-y-3">

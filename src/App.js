@@ -5,6 +5,9 @@ import Home from "./Home";
 import Footer from "./Components/Footer";
 import ContactUs from "./ContactUs";
 import Careers from "./Careers";
+import TermsAndConditions from "./TermsAndConditions";
+import PrivacyPolicy from "./PrivacyPolicy";
+import AboutUs from "./AboutUs";
 
 function App() {
   return (
@@ -15,6 +18,13 @@ function App() {
         <Route exact path="/trucker" element={<Home isTrucker={true} />} />
         <Route exact path="/contactUs" element={<ContactUs />} />
         <Route exact path="/carrers" element={<Careers />} />
+        <Route exact path="/aboutUs" element={<AboutUs />} />
+        <Route
+          exact
+          path="/terms-and-conditions"
+          element={<TermsAndConditions />}
+        />
+        <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
     </div>
   );
