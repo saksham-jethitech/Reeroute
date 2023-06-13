@@ -4,6 +4,8 @@ import FailMessage from "./FormMessage/FailMessage";
 import axios from "axios";
 import { BASE_URL } from "../Constants";
 import { CircularProgress } from "@material-ui/core";
+import MapComponent from "./MapComponent";
+import AutocompleteInput from "./AutocompleteInput";
 
 const TruckerForm = () => {
   const [mobileNumber, setMobileNumber] = useState("");
@@ -70,24 +72,6 @@ const TruckerForm = () => {
     setShowFailMessage(false);
   };
 
-  const fetchCities = async () => {
-    try {
-      const response = await fetch(
-        "https://api.data.gov.in/resource/8e972f30-34a6-4a6f-9946-2a3fc5f26a6f"
-      );
-      const data = await response.json();
-
-      const indianCities = data.results.map((city) => city.city);
-      console.log(indianCities);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCities();
-  }, []);
-
   return (
     <div className="bg-white rounded-lg p-5 w-[80%] lg:w-[30%] relative">
       {showSuccessMessage ? (
@@ -143,7 +127,9 @@ const TruckerForm = () => {
             <label for="city" className="font-rubik font-normal text-sm">
               City
             </label>
-            <select
+            <AutocompleteInput setCity={setCity} />
+            {/* <MapComponent city={city} setCity={setCity} /> */}
+            {/* <select
               id="city"
               className="outline-none border border-[#00000033] py-2 px-1 rounded-md"
               value={city}
@@ -155,7 +141,7 @@ const TruckerForm = () => {
               <option>Manali</option>
               <option>Dehradun</option>
               <option>Lucknow</option>
-            </select>
+            </select> */}
             {emptyCityField && (
               <p className="font-normal text-[#EA1414] font-rubik text-xs">
                 This field is required!
