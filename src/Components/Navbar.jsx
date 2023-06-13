@@ -1,13 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 0;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // return () => {
+    //   window.removeEventListener("scroll", handleScroll);
+    // };
+  }, []);
+
+  const handleClick = () => {
+    // setAllLinksToInactive();
+    window.scroll(0, 0);
+  };
+
+  const handleHowItWorkClick = () => {
+    setTimeout(() => {
+      const howItWorksSection = document.getElementById("how-it-works");
+      if (howItWorksSection) {
+        howItWorksSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 0);
+  };
 
   const location = useLocation();
 
   return (
-    <nav className="w-full bg-transparent fixed shadow z-10">
+    <nav
+      className={`w-full  ${
+        navbar ? "bg-black" : scrolled ? "bg-black" : "bg-transparent "
+      }   fixed  z-10`}
+    >
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -58,12 +90,13 @@ const Navbar = () => {
               navbar ? "block" : "hidden"
             }`}
           >
-            <ul className="items-center justify-center space-y-8 md:flex md:space-x-20 md:space-y-0">
+            <ul className="items-center justify-center space-y-8 md:flex md:space-x-20 md:space-y-0 ">
               <li>
                 <NavLink
-                  to="/shipper"
+                  to="/"
+                  onClick={handleClick}
                   className={`${
-                    location.pathname == "/shipper"
+                    location.pathname == "/"
                       ? `border-b-4 border-white rounded`
                       : ``
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}
@@ -74,6 +107,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/trucker"
+                  onClick={handleClick}
                   className={`${
                     location.pathname == "/trucker"
                       ? `border-b-4 border-white rounded`
@@ -85,9 +119,10 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/about"
+                  to="/aboutUs"
+                  onClick={handleClick}
                   className={`${
-                    location.pathname == "/about"
+                    location.pathname == "/aboutUs"
                       ? `border-b-4 border-white rounded`
                       : `text-white`
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}
@@ -97,12 +132,13 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/how-it-works"
+                  to="/"
                   className={`${
                     location.pathname == "/how-it-works"
                       ? `border-b-4 border-white rounded`
                       : `text-white`
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}
+                  onClick={handleHowItWorkClick}
                 >
                   How It Works
                 </Link>
@@ -110,9 +146,10 @@ const Navbar = () => {
               <li>
                 <NavLink
                   // onClick={handleGetApp}
-                  to="/contact"
+                  to="/contactUs"
+                  onClick={handleClick}
                   className={`${
-                    location.pathname == "/contact"
+                    location.pathname == "/contactUs"
                       ? `border-b-4 border-white rounded`
                       : `text-white`
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}
