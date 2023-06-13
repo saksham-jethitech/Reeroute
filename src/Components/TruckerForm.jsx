@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SuccessMessage from "./FormMessage/SuccessMessage";
 import FailMessage from "./FormMessage/FailMessage";
 import axios from "axios";
 import { BASE_URL } from "../Constants";
+import { CircularProgress } from "@material-ui/core";
 
 const TruckerForm = () => {
   const [mobileNumber, setMobileNumber] = useState("");
@@ -14,6 +15,7 @@ const TruckerForm = () => {
   const [emptyCityField, setEmpltyCityField] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailMessage, setShowFailMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async () => {
     setEmpltyCityField(false);
@@ -40,7 +42,7 @@ const TruckerForm = () => {
       return;
 
     // setShowSuccessMessage(true);
-
+    setIsLoading(true);
     await axios
       .post(`${BASE_URL}/email/trucker`, {
         mobileNumber,
@@ -49,12 +51,14 @@ const TruckerForm = () => {
       })
       .then((res) => {
         setShowSuccessMessage(true);
+        setIsLoading(false);
         setMobileNumber("");
         setNumberOfTrucks("");
         setCity("");
       })
       .catch((error) => {
         setShowFailMessage(true);
+        setIsLoading(false);
       });
   };
 
@@ -66,8 +70,26 @@ const TruckerForm = () => {
     setShowFailMessage(false);
   };
 
+  const fetchCities = async () => {
+    try {
+      const response = await fetch(
+        "https://api.data.gov.in/resource/8e972f30-34a6-4a6f-9946-2a3fc5f26a6f"
+      );
+      const data = await response.json();
+
+      const indianCities = data.results.map((city) => city.city);
+      console.log(indianCities);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCities();
+  }, []);
+
   return (
-    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-[30%] ">
+    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-[30%] relative">
       {showSuccessMessage ? (
         <SuccessMessage setOpen={handleSuccessSubmit} />
       ) : showFailMessage ? (
@@ -150,6 +172,15 @@ const TruckerForm = () => {
           </div>
         </div>
       )}
+      {isLoading ? (
+        <div className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black bg-opacity-30 text-white z-50">
+          <CircularProgress
+            color="inherit"
+            size="7rem"
+            className="self-center"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

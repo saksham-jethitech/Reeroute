@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import TruckerForm from "./Components/TruckerForm";
 import HomeAdditionalDetail from "./Components/HomeAdditionalDetail";
@@ -6,16 +6,52 @@ import ShipperForm from "./Components/ShipperForm";
 import Footer from "./Components/Footer";
 
 const Home = ({ isTrucker }) => {
+  const [activeBackground, setActiveBackground] = useState("");
+  const [firstCircle, setFirstCircle] = useState("/Assets/filled-circle.png");
+  const [secondCircle, setSecondCircle] = useState("/Assets/empty-circle.png");
+  const [thirdCircle, setThirdCircle] = useState("/Assets/empty-circle.png");
+
+  useEffect(() => {
+    if (isTrucker) setActiveBackground("/Assets/background-trucker.jpg");
+    else setActiveBackground("/Assets/background-shipper.png");
+  }, [isTrucker]);
+
+  const handleFirstCircleClick = () => {
+    if (isTrucker) setActiveBackground("/Assets/background-trucker.jpg");
+    else setActiveBackground("/Assets/background-shipper.png");
+    setFirstCircle("/Assets/filled-circle.png");
+    setSecondCircle("/Assets/empty-circle.png");
+    setThirdCircle("/Assets/empty-circle.png");
+  };
+
+  const handleSecondCircleClick = () => {
+    setActiveBackground("/Assets/background-2.png");
+    setFirstCircle("/Assets/empty-circle.png");
+    setSecondCircle("/Assets/filled-circle.png");
+    setThirdCircle("/Assets/empty-circle.png");
+  };
+
+  const handleThirdCircleClick = () => {
+    setActiveBackground("/Assets/background-3.png");
+    setFirstCircle("/Assets/empty-circle.png");
+    setSecondCircle("/Assets/empty-circle.png");
+    setThirdCircle("/Assets/filled-circle.png");
+  };
+
   return (
     <>
       <div className="w-full h-auto">
         <div className="relative h-screen">
           <img
+            src={activeBackground}
+            className="w-full h-full object-cover inset-0"
+          />
+          {/* <img
             src={`/Assets/background-${
               isTrucker ? "trucker.jpg" : "shipper.png"
             }`}
             className="w-full h-full object-cover inset-0"
-          />
+          /> */}
           <div
             className={`absolute inset-0 bg-black ${
               isTrucker ? "opacity-10" : "opacity-50"
@@ -51,6 +87,23 @@ const Home = ({ isTrucker }) => {
               </div>
             </div>
             {isTrucker ? <TruckerForm /> : <ShipperForm />}
+          </div>
+          <div className="absolute inset-0 flex top-[90%] left-[40%] lg:left-[45%] space-x-5 items-center">
+            <img
+              src={firstCircle}
+              className="cursor-pointer"
+              onClick={handleFirstCircleClick}
+            />
+            <img
+              src={secondCircle}
+              className="cursor-pointer"
+              onClick={handleSecondCircleClick}
+            />
+            <img
+              src={thirdCircle}
+              className="cursor-pointer"
+              onClick={handleThirdCircleClick}
+            />
           </div>
           <HomeAdditionalDetail isTrucker={isTrucker} />
           <Footer />

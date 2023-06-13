@@ -18,6 +18,20 @@ const Navbar = () => {
     // };
   }, []);
 
+  const handleClick = () => {
+    // setAllLinksToInactive();
+    window.scroll(0, 0);
+  };
+
+  const handleHowItWorkClick = () => {
+    setTimeout(() => {
+      const howItWorksSection = document.getElementById("how-it-works");
+      if (howItWorksSection) {
+        howItWorksSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 0);
+  };
+
   const location = useLocation();
 
   return (
@@ -80,6 +94,7 @@ const Navbar = () => {
               <li>
                 <NavLink
                   to="/"
+                  onClick={handleClick}
                   className={`${
                     location.pathname == "/"
                       ? `border-b-4 border-white rounded`
@@ -92,6 +107,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/trucker"
+                  onClick={handleClick}
                   className={`${
                     location.pathname == "/trucker"
                       ? `border-b-4 border-white rounded`
@@ -104,6 +120,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/aboutUs"
+                  onClick={handleClick}
                   className={`${
                     location.pathname == "/aboutUs"
                       ? `border-b-4 border-white rounded`
@@ -115,12 +132,13 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/how-it-works"
+                  to="/"
                   className={`${
                     location.pathname == "/how-it-works"
                       ? `border-b-4 border-white rounded`
                       : `text-white`
                   } text-white hover:border-b-4 pb-1 hover:border-white hover:rounded font-semibold font-krub text-base`}
+                  onClick={handleHowItWorkClick}
                 >
                   How It Works
                 </Link>
@@ -129,6 +147,7 @@ const Navbar = () => {
                 <NavLink
                   // onClick={handleGetApp}
                   to="/contactUs"
+                  onClick={handleClick}
                   className={`${
                     location.pathname == "/contactUs"
                       ? `border-b-4 border-white rounded`

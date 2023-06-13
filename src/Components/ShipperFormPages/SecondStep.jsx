@@ -20,6 +20,8 @@ const SecondStep = ({
   setTruckHeight,
   emptyTruckHeightField,
   handleSubmit,
+  isKg,
+  setIsKg,
 }) => {
   //   const handleSubmit = () => {
   //     setShowSecondStep(false);
@@ -54,24 +56,7 @@ const SecondStep = ({
           </span>
         </div>
       </div>
-      <div className="flex flex-col w-full space-y-2">
-        <label for="materialWeight" className="font-rubik font-normal text-sm">
-          Material Weight
-        </label>
-        <input
-          id="materialWeight"
-          type="text"
-          placeholder="0"
-          className="outline-none border border-[#00000033] py-2 px-1 rounded-md"
-          value={materialWeight}
-          onChange={(e) => setMaterialWeight(e.target.value)}
-        />
-        {emptyMaterialWeightField && (
-          <p className="font-normal text-[#EA1414] font-rubik text-xs">
-            This field is required!
-          </p>
-        )}
-      </div>
+
       <div className="flex flex-col w-full space-y-2">
         <label for="vehicleType" className="font-rubik font-normal text-sm">
           Vehicle Type
@@ -87,11 +72,50 @@ const SecondStep = ({
           <option value="" disabled hidden>
             Select Vehicle Type
           </option>
-          <option value="truck">Truck</option>
-          <option value="train">Train</option>
-          <option value="aeroplane">aeroplane</option>
+          <option value="Open Truck">Open Truck</option>
+          <option value="Container">Container</option>
+          <option value="Small Pickup Truck">Small Pickup Truck</option>
         </select>
         {emptyVehicleTypeField && (
+          <p className="font-normal text-[#EA1414] font-rubik text-xs">
+            This field is required!
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col w-full space-y-2">
+        <label for="materialWeight" className="font-rubik font-normal text-sm">
+          Material Weight
+        </label>
+        <div className="relative w-full">
+          <input
+            id="materialWeight"
+            type="text"
+            placeholder="0"
+            className="outline-none border border-[#00000033] py-2 px-1 rounded-md w-full"
+            value={materialWeight}
+            onChange={(e) => setMaterialWeight(e.target.value)}
+          />
+          <div className="absolute right-[1%] bottom-[8%]  flex items-center border border-[#00000033] rounded-md">
+            <div
+              className={`${
+                isKg ? "bg-[#FFB629]" : "bg-white"
+              } px-3  py-2 rounded-md cursor-pointer`}
+              onClick={() => setIsKg(true)}
+            >
+              <p className="font-rubik font-normal text-xs">KGs</p>
+            </div>
+            <div
+              className={`${
+                !isKg ? "bg-[#FFB629]" : "bg-white"
+              } px-3 py-2 rounded-md cursor-pointer`}
+              onClick={() => setIsKg(false)}
+            >
+              <p className="font-rubik font-normal text-xs">Tons</p>
+            </div>
+          </div>
+        </div>
+        {emptyMaterialWeightField && (
           <p className="font-normal text-[#EA1414] font-rubik text-xs">
             This field is required!
           </p>
@@ -112,9 +136,16 @@ const SecondStep = ({
             <option value="" disabled hidden>
               0
             </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1 Ft">1 Ft</option>
+            <option value="2 Ft">2 Ft</option>
+            <option value="3 Ft">3 Ft</option>
+            <option value="4 Ft">4 Ft</option>
+            <option value="5 Ft">5 Ft</option>
+            <option value="6 Ft">6 Ft</option>
+            <option value="7 Ft">7 Ft</option>
+            <option value="8 Ft">8 Ft</option>
+            <option value="9 Ft">9 Ft</option>
+            <option value="10 Ft">10 Ft</option>
           </select>
           {emptyTruckLengthField && (
             <p className="font-normal text-[#EA1414] font-rubik text-xs">
@@ -135,9 +166,16 @@ const SecondStep = ({
             <option value="" disabled hidden>
               0
             </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
+            <option value="1 Ft">1 Ft</option>
+            <option value="2 Ft">2 Ft</option>
+            <option value="3 Ft">3 Ft</option>
+            <option value="4 Ft">4 Ft</option>
+            <option value="5 Ft">5 Ft</option>
+            <option value="6 Ft">6 Ft</option>
+            <option value="7 Ft">7 Ft</option>
+            <option value="8 Ft">8 Ft</option>
+            <option value="9 Ft">9 Ft</option>
+            <option value="10 Ft">10 Ft</option>
           </select>
           {emptyTruckHeightField && (
             <p className="font-normal text-[#EA1414] font-rubik text-xs">

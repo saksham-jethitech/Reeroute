@@ -2,7 +2,10 @@ import React from "react";
 
 const HowItWorksSection = ({ isTrucker }) => {
   return (
-    <div className="flex flex-col justify-center py-8 px-16 space-y-5">
+    <div
+      className="flex flex-col justify-center py-8 px-16 space-y-5"
+      id="how-it-works"
+    >
       <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
         <span className="font-rubik font-normal text-[#2A4F6D] text-sm">
           How it works

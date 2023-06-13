@@ -90,7 +90,10 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row sapce-y-6 lg:space-y-0 bg-[#F4F4F4] items-center py-10">
+      <div
+        className="flex flex-col lg:flex-row sapce-y-6 lg:space-y-0 bg-[#F4F4F4] items-center py-10"
+        id="download-section"
+      >
         <img src="/Assets/mobile-icon.png" className="w-full lg:w-1/2" />
         <div className="flex flex-col-reverse lg:flex-col w-full lg:w-1/2 space-y-8">
           <div className="mt-8 lg:mt-0 px-3 lg:px-0 flex flex-col w-full lg:w-[70%] space-y-9">
@@ -127,7 +130,7 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
           </div>
           <div className="flex flex-col space-y-3">
             <p className="text-center lg:text-left lg:font-rubik font-medium text-2xl">
-              Download Trucker App
+              {`Download ${isTrucker ? "Trucker" : "Shipper"} App`}
             </p>
             <div className="flex flex-col lg:flex-row lg:space-x-2 w-full items-center">
               <img src="/Assets/google.png" />

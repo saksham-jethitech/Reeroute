@@ -6,6 +6,9 @@ import { IoCallOutline } from "react-icons/io5";
 import { BiTimeFive } from "react-icons/bi";
 import axios from "axios";
 import { BASE_URL } from "./Constants";
+import SuccessMessage from "./Components/FormMessage/SuccessMessage";
+import { CircularProgress } from "@material-ui/core";
+import FailMessage from "./Components/FormMessage/FailMessage";
 
 const Careers = () => {
   const [name, setName] = useState("");
@@ -14,10 +17,23 @@ const Careers = () => {
   const [department, setDepartment] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showFailMessage, setShowFailMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [emptyField, setEmptyField] = useState(false);
 
   const handleSubmit = async () => {
     setShowSuccessMessage(false);
     setShowFailMessage(false);
+    setIsLoading(true);
+
+    if (
+      name.length == 0 ||
+      email.length == 0 ||
+      mobileNumber.length == 0 ||
+      department.length == 0
+    ) {
+      setEmptyField(true);
+      return;
+    }
 
     await axios
       .post(`${BASE_URL}/email/carrer`, {
@@ -27,15 +43,27 @@ const Careers = () => {
         department,
       })
       .then((res) => {
+        setShowSuccessMessage(true);
+        setIsLoading(false);
         setName("");
         setEmail("");
         setMobileNumber("");
         setDepartment("");
-        setShowSuccessMessage(true);
       })
       .catch((error) => {
         setShowFailMessage(true);
+        setIsLoading(false);
       });
+  };
+
+  const handleSuccess = () => {
+    setShowSuccessMessage(false);
+    setShowFailMessage(false);
+  };
+
+  const handleFailure = () => {
+    setShowSuccessMessage(false);
+    setShowFailMessage(false);
   };
 
   return (
@@ -67,112 +95,132 @@ const Careers = () => {
         </div>
 
         <div className="min-h-screen py-16 flex justify-center">
-          <div className="lg:border lg:border-[#000000CC] rounded-lg lg:py-16 lg:px-10 flex flex-col items-start w-[90%] lg:w-1/2 space-y-8">
-            <div className="flex flex-col w-full items-start space-y-2">
-              <div className="bg-[#2A4F6D] lg:bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
-                <span className="font-rubik font-normal text-white lg:text-[#2A4F6D] text-sm">
-                  Carrers
-                </span>
+          {showSuccessMessage ? (
+            <SuccessMessage setOpen={handleSuccess} />
+          ) : showFailMessage ? (
+            <FailMessage setOpen={handleFailure} />
+          ) : (
+            <div className="lg:border lg:border-[#000000CC] rounded-lg lg:py-16 lg:px-10 flex flex-col items-start w-[90%] lg:w-1/2 space-y-8">
+              <div className="flex flex-col w-full items-start space-y-2">
+                <div className="bg-[#2A4F6D] lg:bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
+                  <span className="font-rubik font-normal text-white lg:text-[#2A4F6D] text-sm">
+                    Carrers
+                  </span>
+                </div>
+                <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#2A4F6D] lg:text-black">
+                  Join Our Team
+                </h3>
+                <p className="font-krub font-medium text-base text-[#2A4F6D] lg:text-black">
+                  Join Our Team: Unlock Your Potential and Build a Fulfilling
+                  Career in the Dynamic World of Logistics!
+                </p>
               </div>
-              <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#2A4F6D] lg:text-black">
-                Join Our Team
-              </h3>
-              <p className="font-krub font-medium text-base text-[#2A4F6D] lg:text-black">
-                Join Our Team: Unlock Your Potential and Build a Fulfilling
-                Career in the Dynamic World of Logistics!
-              </p>
-            </div>
 
-            <div className="flex flex-col lg:flex-row w-full items-start lg:items-around justify-center lg:justify-around space-y-5 lg:space-y-0">
-              <div className="flex flex-row lg:flex-col items-center space-x-5 lg:space-x-0 lg:justify-start space-y-2">
-                <div className="w-16 h-16 rounded-full bg-black flex justify-center items-center">
-                  <AiOutlineMail className="text-white text-2xl" />
-                </div>
-                <p className="font-krub font-medium text-sm text-black">
-                  Contact@logistics.com
-                </p>
-              </div>
-              <div className="flex flex-row lg:flex-col items-center space-x-5 lg:space-x-0 lg:justify-start space-y-2">
-                <div className="w-16 h-16 rounded-full bg-black flex justify-center items-center">
-                  <IoCallOutline className="text-white text-2xl" />
-                </div>
-                <p className="font-krub font-medium text-sm text-black">
-                  (00) 112 365 489
-                </p>
-              </div>
-              <div className="flex flex-row lg:flex-col items-center space-x-5 lg:space-x-0 lg:justify-start space-y-2">
-                <div className="w-16 h-16 rounded-full bg-black flex justify-center items-center">
-                  <BiTimeFive className="text-white text-2xl" />
-                </div>
-                <div className="w-[60%] lg:flex lg:justify-center">
-                  <p className="font-krub font-medium text-sm text-black w-full lg:text-center">
-                    Mon - Sat 9.00 - 18.00 Sunday Closed
+              <div className="flex flex-col lg:flex-row w-full items-start lg:items-around justify-center lg:justify-around space-y-5 lg:space-y-0">
+                <div className="flex flex-row lg:flex-col items-center space-x-5 lg:space-x-0 lg:justify-start space-y-2">
+                  <div className="w-16 h-16 rounded-full bg-black flex justify-center items-center">
+                    <AiOutlineMail className="text-white text-2xl" />
+                  </div>
+                  <p className="font-krub font-medium text-sm text-black">
+                    Contact@logistics.com
                   </p>
                 </div>
+                <div className="flex flex-row lg:flex-col items-center space-x-5 lg:space-x-0 lg:justify-start space-y-2">
+                  <div className="w-16 h-16 rounded-full bg-black flex justify-center items-center">
+                    <IoCallOutline className="text-white text-2xl" />
+                  </div>
+                  <p className="font-krub font-medium text-sm text-black">
+                    (00) 112 365 489
+                  </p>
+                </div>
+                <div className="flex flex-row lg:flex-col items-center space-x-5 lg:space-x-0 lg:justify-start space-y-2">
+                  <div className="w-16 h-16 rounded-full bg-black flex justify-center items-center">
+                    <BiTimeFive className="text-white text-2xl" />
+                  </div>
+                  <div className="w-[60%] lg:flex lg:justify-center">
+                    <p className="font-krub font-medium text-sm text-black w-full lg:text-center">
+                      Mon - Sat 9.00 - 18.00 Sunday Closed
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col lg:flex-row items-center justify-between w-full space-y-8 lg:space-y-0">
+                <input
+                  type="text"
+                  placeholder="Name*"
+                  className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  type="email"
+                  placeholder="Email Id*"
+                  className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="flex flex-col lg:flex-row items-center justify-between w-full space-y-8 lg:space-y-0">
+                <input
+                  type="text"
+                  placeholder="Mobile Number*"
+                  className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
+                  value={mobileNumber}
+                  onChange={(e) => setMobileNumber(e.target.value)}
+                />
+                <select
+                  className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] text-[#2A4F6D] lg:text-black"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                >
+                  <option value="" hidden disabled selected>
+                    Department*
+                  </option>
+                  <option value="Sales">Sales</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Operations">Operations</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col w-full items-center space-y-4 justify-center">
+                <button
+                  className="relative text-[#23212A] font-krub font-semibold text-base py-4 px-5 bg-[#F79633]"
+                  onClick={handleSubmit}
+                >
+                  Submit Message
+                  {isLoading ? (
+                    <div className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black bg-opacity-30 text-white z-50">
+                      <CircularProgress
+                        color="inherit"
+                        size="2rem"
+                        className="self-center"
+                      />
+                    </div>
+                  ) : null}
+                </button>
+                {/* {showSuccessMessage && (
+                  <p className="font-krub font-normal text-sm text-green-500">
+                    Form Submitted Successfully!
+                  </p>
+                )}
+                {showFailMessage && (
+                  <p className="font-krub font-normal text-sm text-red-500">
+                    Something Went Wrong!
+                  </p>
+                )} */}
+                {emptyField && (
+                  <p className="font-krub font-normal text-sm text-red-500">
+                    Please fill all the fields appropriately
+                  </p>
+                )}
               </div>
             </div>
-
-            <div className="flex flex-col lg:flex-row items-center justify-between w-full space-y-8 lg:space-y-0">
-              <input
-                type="text"
-                placeholder="Name*"
-                className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                type="email"
-                placeholder="Email Id*"
-                className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="flex flex-col lg:flex-row items-center justify-between w-full space-y-8 lg:space-y-0">
-              <input
-                type="text"
-                placeholder="Mobile Number*"
-                className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
-              />
-              <select
-                className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] text-[#2A4F6D] lg:text-black"
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-              >
-                <option value="" hidden disabled selected>
-                  Department*
-                </option>
-                <option value="Sales">Sales</option>
-                <option value="Marketing">Marketing</option>
-                <option value="Operations">Operations</option>
-                <option value="Technology">Technology</option>
-                <option value="Finance">Finance</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col w-full items-center space-y-4 justify-center">
-              <button
-                className="text-[#23212A] font-krub font-semibold text-base py-4 px-5 bg-[#F79633]"
-                onClick={handleSubmit}
-              >
-                Submit Message
-              </button>
-              {showSuccessMessage && (
-                <p className="font-krub font-normal text-sm text-green-500">
-                  Form Submitted Successfully!
-                </p>
-              )}
-              {showFailMessage && (
-                <p className="font-krub font-normal text-sm text-red-500">
-                  Something Went Wrong!
-                </p>
-              )}
-            </div>
-          </div>
+          )}
         </div>
 
         <Footer />

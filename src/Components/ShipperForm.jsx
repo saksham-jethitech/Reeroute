@@ -5,6 +5,7 @@ import FirstStep from "./ShipperFormPages/FirstStep";
 import SecondStep from "./ShipperFormPages/SecondStep";
 import axios from "axios";
 import { BASE_URL } from "../Constants";
+import { CircularProgress } from "@material-ui/core";
 
 const ShipperForm = () => {
   const [fromCity, setFromCity] = useState("");
@@ -24,6 +25,8 @@ const ShipperForm = () => {
   const [emptyTruckLengthField, setEmptyTruckLengthField] = useState(false);
   const [truckHeight, setTruckHeight] = useState("");
   const [emptyTruckHeightField, setEmptyTruckHeightField] = useState(false);
+  const [isKg, setIsKg] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFirstStepSubmit = () => {
     setEmptyFromCityField(false);
@@ -79,12 +82,13 @@ const ShipperForm = () => {
       return;
 
     // setShowSecondStep(true);
-
+    setIsLoading(true);
     await axios
       .post(`${BASE_URL}/email/shipper`, {
         fromCity,
         toCity,
         materialWeight,
+        isKg,
         vehicleType,
         truckLength,
         truckHeight,
@@ -92,15 +96,18 @@ const ShipperForm = () => {
       .then((res) => {
         setShowSuccessMessage(true);
         setShowSecondStep(false);
+        setIsLoading(false);
         setFromCity("");
         setToCity("");
         setMaterialWeight("");
         setVehicleType("");
         setTruckLength("");
         setTruckHeight("");
+        setIsKg(true);
       })
       .catch((error) => {
         setShowFailMessage(true);
+        setIsLoading(false);
       });
 
     // setShowSuccessMessage(true);
@@ -129,7 +136,7 @@ const ShipperForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-[30%] min-h-[60%] ">
+    <div className="bg-white rounded-lg p-5 w-[80%] lg:w-[30%] min-h-[60%] relative">
       {showSuccessMessage ? (
         <SuccessMessage setOpen={handleSuccessClose} />
       ) : showFailMessage ? (
@@ -154,6 +161,8 @@ const ShipperForm = () => {
           setTruckHeight={setTruckHeight}
           emptyTruckHeightField={emptyTruckHeightField}
           handleSubmit={handleSecondStepSubmit}
+          isKg={isKg}
+          setIsKg={setIsKg}
         />
       ) : (
         <FirstStep
@@ -167,6 +176,15 @@ const ShipperForm = () => {
           handleSubmit={handleFirstStepSubmit}
         />
       )}
+      {isLoading ? (
+        <div className="absolute top-0 left-0 bottom-0 right-0 flex items-center justify-center bg-black bg-opacity-30 text-white z-50">
+          <CircularProgress
+            color="inherit"
+            size="7rem"
+            className="self-center"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

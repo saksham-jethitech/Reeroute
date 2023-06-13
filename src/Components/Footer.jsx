@@ -1,13 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineInstagram, AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsTwitter, BsLinkedin } from "react-icons/bs";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   const handleClick = () => {
     // setAllLinksToInactive();
     window.scroll(0, 0);
+  };
+
+  const handleHowItWorkClick = () => {
+    setTimeout(() => {
+      const howItWorksSection = document.getElementById("how-it-works");
+      if (howItWorksSection) {
+        howItWorksSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 0);
+  };
+
+  const handleDownloadClick = () => {
+    setTimeout(() => {
+      const downloadSection = document.getElementById("download-section");
+      if (downloadSection) {
+        downloadSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 0);
   };
 
   return (
@@ -34,18 +54,34 @@ const Footer = () => {
         </div>
 
         <div className="pt-10 lg:mt-0 flex flex-col justify-start  w-1/2 lg:w-[25%] h-1/2 space-y-3">
-          <span className="font-krub font-medium text-base text-white cursor-pointer">
+          <Link
+            to="/aboutUs"
+            className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleClick}
+          >
             About Us
-          </span>
-          <span className="font-krub font-medium text-base text-white cursor-pointer">
+          </Link>
+          <Link
+            to="/"
+            className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleHowItWorkClick}
+          >
             How it Works
-          </span>
-          <span className="font-krub font-medium text-base text-white cursor-pointer">
+          </Link>
+          <Link
+            to="/"
+            className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleDownloadClick}
+          >
             Download App
-          </span>
-          <span className="font-krub font-medium text-base text-white cursor-pointer">
+          </Link>
+          <Link
+            to="/contactUs"
+            className="font-krub font-medium text-base text-white cursor-pointer"
+            onClick={handleClick}
+          >
             Contact
-          </span>
+          </Link>
         </div>
 
         <div className="pt-10 lg:mt-0 flex flex-col justify-start  w-1/2 lg:w-[25%] h-1/2 space-y-3">
