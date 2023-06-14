@@ -20,11 +20,18 @@ const ContactUs = () => {
   const [showFailMessage, setShowFailMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [emptyField, setEmptyField] = useState(false);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPhone, setValidPhone] = useState(true);
 
   const handleSubmit = async () => {
     setShowSuccessMessage(false);
     setShowFailMessage(false);
     setEmptyField(false);
+    setValidEmail(true);
+    setValidPhone(true);
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneNumberRegex = /^\d{10}$/;
 
     if (
       name.length == 0 ||
@@ -36,6 +43,20 @@ const ContactUs = () => {
       setEmptyField(true);
       return;
     }
+
+    const isValidEmail = emailRegex.test(email);
+
+    if (!isValidEmail) {
+      setValidEmail(false);
+    }
+
+    const isValidPhone = phoneNumberRegex.test(phoneNumber);
+
+    if (!isValidPhone) {
+      setValidPhone(false);
+    }
+
+    if (!isValidEmail || !isValidPhone) return;
 
     setIsLoading(true);
     await axios
@@ -85,7 +106,7 @@ const ContactUs = () => {
           />
           <div className={`absolute inset-0 bg-black opacity-80 `}></div>
           <div className="absolute inset-0 flex flex-col py-2 space-y-16 lg:space-y-0 justify-center lg:flex-row items-center ">
-            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-2/5 space-y-3">
+            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-[70%] space-y-3">
               <div className="px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780]">
                 <p className=" font-rubik font-normal text-sm text-white">
                   Contact
@@ -163,7 +184,11 @@ const ContactUs = () => {
                   <input
                     type="email"
                     placeholder="Email*"
-                    className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
+                    className={`w-full lg:w-[45%] outline-none px-4 py-2 border ${
+                      validEmail
+                        ? "border-[#2A4F6D] lg:border-[#00000033]"
+                        : "border-red-600"
+                    }  placeholder:text-[#2A4F6D] lg:placeholder:text-black`}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -173,7 +198,11 @@ const ContactUs = () => {
                   <input
                     type="text"
                     placeholder="Phone Number*"
-                    className="w-full lg:w-[45%] outline-none px-4 py-2 border border-[#2A4F6D] lg:border-[#00000033] placeholder:text-[#2A4F6D] lg:placeholder:text-black"
+                    className={`w-full lg:w-[45%] outline-none px-4 py-2 border ${
+                      validPhone
+                        ? "border-[#2A4F6D] lg:border-[#00000033]"
+                        : "border-red-600"
+                    }  placeholder:text-[#2A4F6D] lg:placeholder:text-black`}
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                   />
@@ -224,6 +253,11 @@ const ContactUs = () => {
                   {emptyField && (
                     <p className="font-krub font-normal text-sm text-red-500">
                       Fill all the required fields
+                    </p>
+                  )}
+                  {(!validEmail || !validPhone) && (
+                    <p className="font-krub font-normal text-sm text-red-500">
+                      Fill all the fields correctly
                     </p>
                   )}
                 </div>

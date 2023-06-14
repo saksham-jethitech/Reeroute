@@ -42,7 +42,7 @@ const Navbar = () => {
     >
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
-          <div className="flex items-center justify-between py-3 md:py-5 md:block">
+          <div className="flex items-center justify-between py-3 md:py-5 md:block lg:pl-[4.5rem]">
             <a href="javascript:void(0)">
               <img src="/Assets/logo.png" className="h-9" />
             </a>

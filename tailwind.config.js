@@ -8,7 +8,7 @@ module.exports = {
         rubik: ["Rubik", "sans-serif"],
       },
       height: {
-        "vh-80": "80vh",
+        "vh-75": "75vh",
       },
     },
   },

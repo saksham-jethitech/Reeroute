@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
         />
         <div className={`absolute inset-0 bg-black opacity-80 `}></div>
         <div className="absolute inset-0 flex flex-col py-2 space-y-16 lg:space-y-0 justify-center lg:flex-row items-center ">
-          <div className="flex flex-col w-full px-4 lg:px-0 lg:w-2/5 space-y-3">
+          <div className="flex flex-col w-full px-4 lg:px-0 lg:w-[70%] space-y-3">
             <div className="px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780]">
               <p className=" font-rubik font-normal text-sm text-white">
                 Privacy Policy

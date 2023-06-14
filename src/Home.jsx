@@ -57,18 +57,18 @@ const Home = ({ isTrucker }) => {
               isTrucker ? "opacity-10" : "opacity-50"
             } `}
           ></div>
-          <div className="absolute inset-0 flex flex-col py-2 space-y-16 lg:space-y-0 justify-center lg:flex-row items-center ">
-            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-2/5 space-y-3">
-              <div className="px-2 border-l-4 border-l-[#FFB629]">
-                <p className="hidden md:block font-rubik font-normal text-sm text-white">
+          <div className="absolute inset-0 flex flex-col py-2 space-y-8 lg:space-y-0 justify-center lg:flex-row items-center ">
+            <div className="flex flex-col w-full px-10 lg:px-0 lg:w-2/5 space-y-3">
+              <div className="px-2 border-l-4 border-l-[#FFB629] hidden lg:block bg-[#041C3780] w-fit py-1">
+                <p className="hidden lg:block font-rubik font-normal text-sm text-white">
                   Streamline Your Logistics with Easy Truck Booking
                 </p>
               </div>
-              <p className="font-rubik font-bold text-2xl md:text-6xl text-white">
+              <p className="font-rubik font-bold text-3xl sm:text-4xl md:text-6xl text-white">
                 ReeRoute: India's Fastest Truck Booking Platform!
               </p>
               <div className="w-full">
-                <ul className="dot-list pl-0 hidden md:block">
+                <ul className="dot-list pl-0 hidden lg:block">
                   <li className="font-krub font-medium text-base m-0">
                     Pan-India operations
                   </li>
@@ -88,7 +88,7 @@ const Home = ({ isTrucker }) => {
             </div>
             {isTrucker ? <TruckerForm /> : <ShipperForm />}
           </div>
-          <div className="absolute inset-0 flex top-[90%] left-[40%] lg:left-[45%] space-x-5 items-center">
+          <div className="absolute inset-0 flex top-[95%] left-[40%] lg:left-[45%] space-x-5 items-center">
             <img
               src={firstCircle}
               className="cursor-pointer"

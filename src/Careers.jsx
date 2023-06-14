@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./index.css";
 import Footer from "./Components/Footer";
 import { AiOutlineMail } from "react-icons/ai";
@@ -19,11 +19,23 @@ const Careers = () => {
   const [showFailMessage, setShowFailMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [emptyField, setEmptyField] = useState(false);
+  const [validPhone, setValidPhone] = useState(true);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const fileInputRef = useRef(null);
+
+  const handleFileSelect = (event) => {};
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
 
   const handleSubmit = async () => {
     setShowSuccessMessage(false);
     setShowFailMessage(false);
-    setIsLoading(true);
+
+    const phoneNumberRegex = /^\d{10}$/;
 
     if (
       name.length == 0 ||
@@ -35,13 +47,48 @@ const Careers = () => {
       return;
     }
 
+    const isValidPhone = phoneNumberRegex.test(mobileNumber);
+
+    if (!isValidPhone) {
+      setValidPhone(false);
+      return;
+    }
+
+    setIsLoading(true);
+
+    const formData = new FormData();
+    formData.append("resume", selectedFile);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("mobileNumber", mobileNumber);
+    formData.append("department", department);
+
+    // await axios
+    //   .post(`${BASE_URL}/email/carrer`, {
+    //     name,
+    //     email,
+    //     mobileNumber,
+    //     department,
+    //     formData,
+    //   }, {
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data',
+    //     })
+    //   .then((res) => {
+    //     setShowSuccessMessage(true);
+    //     setIsLoading(false);
+    //     setName("");
+    //     setEmail("");
+    //     setMobileNumber("");
+    //     setDepartment("");
+    //   })
+    //   .catch((error) => {
+    //     setShowFailMessage(true);
+    //     setIsLoading(false);
+    //   });
+
     await axios
-      .post(`${BASE_URL}/email/carrer`, {
-        name,
-        email,
-        mobileNumber,
-        department,
-      })
+      .post(`${BASE_URL}/email/carrer`, formData)
       .then((res) => {
         setShowSuccessMessage(true);
         setIsLoading(false);
@@ -49,6 +96,7 @@ const Careers = () => {
         setEmail("");
         setMobileNumber("");
         setDepartment("");
+        setSelectedFile(null);
       })
       .catch((error) => {
         setShowFailMessage(true);
@@ -66,6 +114,9 @@ const Careers = () => {
     setShowFailMessage(false);
   };
 
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
   return (
     <>
       <div className="w-full h-auto">
@@ -80,10 +131,10 @@ const Careers = () => {
           />
           <div className={`absolute inset-0 bg-black opacity-80 `}></div>
           <div className="absolute inset-0 flex flex-col py-2 space-y-16 lg:space-y-0 justify-center lg:flex-row items-center ">
-            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-2/5 space-y-3">
+            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-[70%] space-y-3">
               <div className="px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780]">
                 <p className="font-rubik font-normal text-sm text-white">
-                  Carrers
+                  Careers
                 </p>
               </div>
               <p className="font-rubik font-bold w-1/2 lg:w-auto text-4xl md:text-6xl text-white">
@@ -104,7 +155,7 @@ const Careers = () => {
               <div className="flex flex-col w-full items-start space-y-2">
                 <div className="bg-[#2A4F6D] lg:bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
                   <span className="font-rubik font-normal text-white lg:text-[#2A4F6D] text-sm">
-                    Carrers
+                    Careers
                   </span>
                 </div>
                 <h3 className="font-rubik font-semibold text-2xl lg:text-4xl text-[#2A4F6D] lg:text-black">
@@ -186,6 +237,30 @@ const Careers = () => {
                   <option value="Others">Others</option>
                 </select>
               </div>
+              <div className="flex flex-col lg:flex-row items-center justify-center w-full space-y-8 lg:space-y-0">
+                {selectedFile ? (
+                  <label className="border border-[#00000033] rounded-md px-6 py-3 font-krub text-base font-semibold text-[#23212A]">
+                    Uploaded
+                  </label>
+                ) : (
+                  <>
+                    <label
+                      htmlFor="resume-upload"
+                      className="border border-[#00000033] rounded-md px-6 py-3 font-krub text-base font-semibold text-[#23212A]"
+                    >
+                      Upload Resume
+                    </label>
+                    <input
+                      id="resume-upload"
+                      type="file"
+                      accept=".pdf"
+                      ref={fileInputRef}
+                      onChange={handleFileInputChange}
+                      className="hidden"
+                    />
+                  </>
+                )}
+              </div>
 
               <div className="flex flex-col w-full items-center space-y-4 justify-center">
                 <button
@@ -216,6 +291,11 @@ const Careers = () => {
                 {emptyField && (
                   <p className="font-krub font-normal text-sm text-red-500">
                     Please fill all the fields appropriately
+                  </p>
+                )}
+                {!validPhone && (
+                  <p className="font-krub font-normal text-sm text-red-500">
+                    Fill all the fields correctly
                   </p>
                 )}
               </div>

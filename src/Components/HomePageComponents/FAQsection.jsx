@@ -22,10 +22,15 @@ const FAQs = [
 
 const FAQsection = ({ isTrucker }) => {
   return (
-    <div className="flex flex-col justify-center py-8 lg:px-16 space-y-5 min-h-screen">
-      <div className="w-full flex flex-col-reverse lg:flex-row items-center justify-between">
+    <div className="flex flex-col justify-center py-8 lg:py-16 lg:px-16 space-y-5 ">
+      <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2 ml-2 lg:hidden">
+        <span className="font-rubik font-normal text-[#2A4F6D] text-sm">
+          FAQ
+        </span>
+      </div>
+      <div className="w-full flex flex-col-reverse lg:flex-row items-center lg:items-start justify-between">
         <div className="w-[90%] lg:w-1/3 flex flex-col items-start space-y-4">
-          <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
+          <div className="hidden lg:block bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
             <span className="font-rubik font-normal text-[#2A4F6D] text-sm">
               FAQ
             </span>
@@ -37,8 +42,8 @@ const FAQsection = ({ isTrucker }) => {
             <FAQitem question={faq.question} answer={faq.answer} />
           ))}
         </div>
-        <div className="h-screen sm:h-vh-80 lg:h-auto w-full lg:w-1/2">
-          <div className="relative w-full">
+        <div className="h-screen sm:h-vh-75 lg:h-auto w-full lg:w-1/2">
+          <div className="relative w-full flex items-start">
             <img
               src={`/Assets/faq-${isTrucker ? "trucker" : "shipper"}.png`}
               className="w-full"
@@ -71,6 +76,20 @@ const FAQsection = ({ isTrucker }) => {
                 </button>
               </div>
             </div>
+
+            {/* <div className="w-[90%] lg:w-1/3 flex lg:hidden flex-col items-start space-y-4 md:mt-[50%] mt-[98%] px-2">
+              <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
+                <span className="font-rubik font-normal text-[#2A4F6D] text-sm">
+                  FAQ
+                </span>
+              </div>
+              <h3 className="font-rubik font-semibold text-2xl lg:text-5xl text-[#1C1F35]">
+                Frequently Asked Questions
+              </h3>
+              {FAQs.map((faq) => (
+                <FAQitem question={faq.question} answer={faq.answer} />
+              ))}
+            </div> */}
           </div>
         </div>
       </div>

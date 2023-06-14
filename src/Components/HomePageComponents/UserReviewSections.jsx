@@ -33,7 +33,7 @@ const UserReviewSections = ({ isTrucker }) => {
 
   return (
     <div className="bg-[#F4F4F4] lg:bg-white w-full flex justify-start lg:justify-center">
-      <div className="flex flex-col i justify-center py-8 px-16 space-y-5 w-full lg:w-4/5">
+      <div className="flex flex-col i justify-center py-8 px-3 lg:px-16 space-y-5 w-full lg:w-4/5">
         <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
           <span className="font-rubik font-normal text-[#2A4F6D] text-sm">
             Testimonial
@@ -62,7 +62,7 @@ const UserReviewSections = ({ isTrucker }) => {
           <div className="w-[90%] flex items-center justify-center">
             <div className="w-full lg:w-1/2 bg-[#F4F4F4] flex flex-col px-1 lg:px-4 py-12 justify-center space-y-5">
               <div className="flex flex-col lg:flex-row items-start justify-center space-y-3 lg:space-y-0 lg:justify-between lg:items-center">
-                <div className="flex items-center space-x-2">
+                <div className="flex w-[80%] lg:w-auto justify-between lg:justify-start items-center space-x-2">
                   <img src={reviews[activeCardSet].image} />
                   <div className="flex flex-col">
                     <p className="text-[#091242] font-rubik font-medium text-xl">
@@ -73,7 +73,7 @@ const UserReviewSections = ({ isTrucker }) => {
                     </p>
                   </div>
                 </div>
-                <div className="flex w-[40%] justify-center">
+                <div className="flex  w-[30%] lg:w-[40%] justify-center">
                   <img
                     src="/Assets/review-icon.png"
                     className="w-7 h-7 lg:w-auto lg:h-auto"

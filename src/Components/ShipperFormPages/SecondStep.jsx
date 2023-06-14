@@ -31,7 +31,7 @@ const SecondStep = ({
 
   return (
     <div className="flex flex-col items-center space-y-5 ">
-      <div className="flex items-center w-full space-x-9">
+      <div className="flex items-center w-full space-x-9 md:space-x-20">
         <AiOutlineArrowLeft
           className="w-8 text-[#2A4F6D] cursor-pointer"
           onClick={() => setShowSecondStep(false)}

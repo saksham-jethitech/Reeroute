@@ -62,7 +62,7 @@ const AboutUs = () => {
             className={`absolute inset-0 bg-black opacity-60 lg:opacity-70 `}
           ></div>
           <div className="absolute inset-0 flex flex-col py-2 space-y-16 lg:space-y-0 justify-center lg:flex-row items-center ">
-            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-2/5 space-y-3">
+            <div className="flex flex-col w-full px-4 lg:px-0 lg:w-[70%] space-y-3">
               <div className="px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780]">
                 <p className=" font-rubik font-normal text-sm text-white">
                   About Us
@@ -105,7 +105,7 @@ const AboutUs = () => {
                 <img src="/Assets/ambitious-businessman.png" />
               </div>
             </div>
-            <div className="flex flex-col items-start w-full lg:w-1/2 space-y-6  lg:px-12">
+            <div className="flex flex-col items-start w-full lg:w-1/2 space-y-6 px-5  lg:px-12">
               <div className="px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780] hidden lg:block">
                 <p className=" font-rubik font-normal text-sm text-white">
                   About Us
@@ -167,13 +167,14 @@ const AboutUs = () => {
               </div>
             </div>
           </div>
-          <div className="w-4/5 flex flex-col items-start space-y-7">
-            <div className="px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780]">
+
+          <div className="w-[85%] lg:w-4/5 flex flex-col items-start space-y-7">
+            <div className="lg:ml-8 px-2 w-fit  border-l-4 border-l-[#FFB629] bg-[#041C3780]">
               <p className=" font-rubik font-normal text-sm text-white">
                 What We Do
               </p>
             </div>
-            <h3 className="font-rubik text-4xl font-semibold text-[#1C1F35]">
+            <h3 className="lg:ml-8 font-rubik text-4xl font-semibold text-[#1C1F35]">
               Our Logistics Services
             </h3>
             <div className="flex flex-col lg:flex-row flex-wrap pt-5 justify-between">
