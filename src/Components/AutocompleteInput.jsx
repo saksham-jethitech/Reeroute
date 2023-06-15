@@ -8,7 +8,8 @@ const AutocompleteInput = ({ setCity }) => {
     setCity(place.formatted_address);
   };
 
-  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+  // const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+  const API_KEY = "AIzaSyAbgSWBi_qaOWO8YWL8lNSwk8JPIz8Nb9w";
 
   return (
     <GoogleAutocomplete
