@@ -22,7 +22,7 @@ const FAQs = [
 
 const FAQsection = ({ isTrucker }) => {
   return (
-    <div className="flex flex-col justify-center py-8 lg:py-16 lg:px-16 space-y-5 ">
+    <div className="flex flex-col justify-center py-8 lg:py-5 lg:px-16 space-y-5 ">
       <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2 ml-2 lg:hidden">
         <span className="font-rubik font-normal text-[#2A4F6D] text-sm">
           FAQ

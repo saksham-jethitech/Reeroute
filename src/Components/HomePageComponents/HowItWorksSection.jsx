@@ -3,7 +3,7 @@ import React from "react";
 const HowItWorksSection = ({ isTrucker }) => {
   return (
     <div
-      className="flex flex-col justify-center py-8 px-16 space-y-5"
+      className="flex flex-col justify-center py-8 px-2 pl-4 lg:px-16 space-y-5"
       id="how-it-works"
     >
       <div className="bg-[#E8E8E880] border-l-4 border-l-[#f99d5e] w-28 px-2">
@@ -27,7 +27,7 @@ const HowItWorksSection = ({ isTrucker }) => {
           src={`/Assets/how-it-works-${
             isTrucker ? "trucker" : "shipper"
           }-mobile.png`}
-          className="lg:hidden w-[90%]"
+          className="lg:hidden w-full"
         />
       </div>
     </div>

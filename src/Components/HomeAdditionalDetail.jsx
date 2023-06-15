@@ -52,7 +52,43 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
             </li>
           </ul>
         </div>
-        <div className="flex lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+        <div className="flex w-full lg:w-auto justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+          <p className="w-[52%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
+            10,000 +
+          </p>
+          <div className="w-4 h-4  bg-[#f99d5e]"></div>
+          <p className="pl-4 lg:pl-2 w-[40%] lg:w-auto font-rubik font-normal text-base text-[#2A4F6D]">
+            Vehicle Owners
+          </p>
+        </div>
+        <div className="flex w-full lg:w-auto justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+          <p className="w-[52%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
+            25,000+
+          </p>
+          <div className="w-4 h-4  bg-[#f99d5e]"></div>
+          <p className="pl-4 lg:pl-2 w-[40%] lg:w-auto font-rubik font-normal text-base text-[#2A4F6D]">
+            Successful Bookings
+          </p>
+        </div>
+        <div className="flex w-full lg:w-auto justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+          <p className="w-[52%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
+            3,000+
+          </p>
+          <div className="w-4 h-4  bg-[#f99d5e]"></div>
+          <p className="pl-4 lg:pl-2 w-[40%] lg:w-auto font-rubik font-normal text-base text-[#2A4F6D]">
+            Satisfied clients
+          </p>
+        </div>
+        <div className="flex w-full lg:w-auto justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+          <p className="w-[52%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
+            70+
+          </p>
+          <div className="w-4 h-4  bg-[#f99d5e]"></div>
+          <p className="pl-4 lg:pl-2 w-[40%] lg:w-auto font-rubik font-normal text-base text-[#2A4F6D]">
+            Cities Covered
+          </p>
+        </div>
+        {/* <div className="flex justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
           <p className="w-[50%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
             10,000 +
           </p>
@@ -61,16 +97,16 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
             Vehicle Owners
           </p>
         </div>
-        <div className="flex lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+        <div className="flex justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
           <p className="w-[50%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
             25,000+
           </p>
           <div className="w-4 h-4 bg-[#f99d5e]"></div>
-          <p className="w-[40%] font-rubik font-normal text-base text-[#2A4F6D]">
+          <p className="pl-4 lg:pl-0 w-[40%] font-rubik font-normal text-base text-[#2A4F6D]">
             Successful Bookings
           </p>
         </div>
-        <div className="flex lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+        <div className="flex justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
           <p className="w-[50%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
             3,000+
           </p>
@@ -79,7 +115,7 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
             Satisfied clients
           </p>
         </div>
-        <div className="flex lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
+        <div className="flex justify-center lg:justify-between space-x-1 items-center py-4 lg:py-0 px-3 lg:px-0">
           <p className="w-[50%] lg:w-auto font-rubik font-semibold text-4xl text-[#2A4F6D]">
             70+
           </p>
@@ -87,7 +123,7 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
           <p className="w-[40%] font-rubik font-normal text-base text-[#2A4F6D]">
             Cities Covered
           </p>
-        </div>
+        </div> */}
       </div>
 
       <div
@@ -98,7 +134,7 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
 
         {isTrucker ? (
           <div className="flex flex-col-reverse lg:flex-col w-full lg:w-1/2 space-y-8">
-            <div className="mt-8 lg:mt-0 px-3 lg:px-0 flex flex-col w-full lg:w-[70%] space-y-9">
+            <div className="mt-8 lg:mt-0 px-3 pl-5 lg:pl-0 lg:px-0 flex flex-col w-full lg:w-[70%] space-y-9">
               <div className="flex flex-col">
                 <p className="font-krub font-medium text-2xl text-[#2A4F6D]">
                   Choose Your Own Load
@@ -145,7 +181,7 @@ const HomeAdditionalDetail = ({ isTrucker }) => {
           </div>
         ) : (
           <div className="flex flex-col-reverse lg:flex-col w-full lg:w-1/2 space-y-8">
-            <div className="mt-8 lg:mt-0 px-3 lg:px-0 flex flex-col w-full lg:w-[70%] space-y-9">
+            <div className="mt-8 lg:mt-0 px-3 pl-5 lg:pl-0 lg:px-0 flex flex-col w-full lg:w-[70%] space-y-9">
               <div className="flex flex-col">
                 <p className="font-krub font-medium text-2xl text-[#2A4F6D]">
                   Verified Vehicle Owners
